@@ -18,6 +18,14 @@ export function createServer() {
   });
 
   app.get("/api/demo", handleDemo);
+  // Send WhatsApp message via WhatsApp Cloud API
+  try {
+    // lazy import handler
+    const { handleSendWhatsapp } = require("./routes/sendWhatsapp");
+    app.post("/api/send-whatsapp", handleSendWhatsapp);
+  } catch (err) {
+    // ignore if file missing
+  }
 
   return app;
 }

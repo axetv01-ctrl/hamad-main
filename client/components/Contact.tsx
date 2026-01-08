@@ -24,11 +24,15 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
     try {
-      const text = `Name: ${formData.name}\nEmail: ${formData.email}\nProject: ${formData.subject}\nMessage: ${formData.message}`;
-      const encoded = encodeURIComponent(text);
-      const url = `https://wa.me/${WIDGET_PHONE}?text=${encoded}`;
-      window.open(url, "_blank", "noopener,noreferrer");
+      const resp = await fetch("/api/send-whatsapp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!resp.ok) throw new Error("send failed");
 
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
