@@ -1,93 +1,56 @@
 import { ArrowRight } from "lucide-react";
-import ImageSlider from "./ImageSlider";
-
-const heroImages = [
-  "https://images.unsplash.com/photo-1678203699263-917199c725b2?q=80&w=1032&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D?w=1600&h=900&fit=crop",
-];
+import { motion } from "framer-motion";
 
 export default function Hero() {
-  const handleBackgroundClick = () => {
-    // Background click handler
-  };
-
   return (
-    <section
-      className="relative min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-      onClick={handleBackgroundClick}
-    >
-      {/* Background Slider */}
-      <div
-        className="absolute inset-0 -z-10"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <ImageSlider images={heroImages} autoPlay autoPlayInterval={5000} />
-      </div>
+    <motion.section initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="min-h-[80vh] flex items-center py-24 px-6 lg:px-16 bg-white">
+      <div className="max-w-7xl mx-auto w-full flex flex-col-reverse lg:flex-row items-center gap-8">
+        {/* Left content */}
+        <div className="w-full lg:w-1/2 text-left">
+          <div className="inline-block px-4 py-2 bg-yellow-200 text-yellow-900 rounded-md mb-6 text-sm font-medium">
+            HELLO! I AM
+          </div>
 
-      {/* Overlay - Lighter for text visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/40 -z-10" />
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold text-teal-400 leading-tight mb-4">
+            Hammad Sajid
+          </h2>
 
-      {/* Content */}
-      <div
-        className="max-w-4xl mx-auto text-center animate-fade-up relative z-10"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="mb-8">
-          <span className="inline-block px-4 py-2 bg-secondary/20 text-secondary rounded-full text-sm font-medium backdrop-blur-sm border border-secondary/30">
-            Graphic Designer & Motion Artist
-          </span>
+          <p className="text-lg text-slate-700 mb-8">Professional Solution Architect, Web Designer &amp; Developer</p>
+
+          <div className="flex gap-4 items-center">
+            <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} href="https://drive.google.com/uc?export=download&id=1nNfEn2YzNvm7LYcz1h9GYqmnyTIQmRc6" target="_blank" rel="noopener noreferrer" download="Hammad_Sajid_CV.pdf" className="inline-block px-6 py-3 bg-amber-400 text-white rounded-full font-semibold shadow-md transition">
+              Download CV
+            </motion.a>
+            <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} href="#contact" className="inline-block px-6 py-3 bg-pink-500 text-white rounded-full font-semibold shadow-md transition">
+              Send Message
+            </motion.a>
+            <motion.a whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} href="https://www.fiverr.com/your_username" target="_blank" rel="noopener noreferrer" className="ml-6 inline-block px-6 py-3 border border-amber-300 text-amber-600 rounded-full font-semibold shadow-sm transition">
+              Hire Me
+            </motion.a>
+          </div>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-display font-bold mb-6 leading-tight text-white drop-shadow-2xl">
-          Creative Visual Storyteller
-        </h1>
+        {/* Right image */}
+        <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+          <div className="relative w-[53vw] h-[65vw] max-w-[700px] max-h-[700px] lg:w-[35vw] lg:h-[40vw] lg:max-w-[680px] lg:max-h-[680px]">
+            <svg viewBox="0 0 600 600" className="absolute inset-0 w-full h-full">
+              <defs>
+                <linearGradient id="g" x1="0" x2="1">
+                  <stop offset="0%" stopColor="#E6F6F2" />
+                  <stop offset="100%" stopColor="#F7FBFA" />
+                </linearGradient>
+              </defs>
+              <path fill="url(#g)" d="M421.5,318Q392,386,322,413.5Q252,441,189,410Q126,379,94.5,319.5Q63,260,88,200Q113,140,175,108Q237,76,298,90.5Q359,105,404,150Q449,195,421.5,318Z" />
+            </svg>
 
-        <p className="text-lg sm:text-xl text-white/95 mb-8 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
-          Transforming ideas into stunning visual experiences. Specializing in{" "}
-          <span className="font-semibold text-secondary">graphic design</span>{" "}
-          and{" "}
-          <span className="font-semibold text-secondary">video animation</span>{" "}
-          for brands that stand out.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3 bg-secondary text-secondary-foreground rounded-lg font-semibold hover:opacity-90 transition-all duration-200 hover:gap-3 shadow-lg hover:shadow-xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Start a Project <ArrowRight size={18} />
-          </a>
-          <a
-            href="#work"
-            className="inline-flex items-center justify-center px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
-            onClick={(e) => e.stopPropagation()}
-          >
-            View My Work
-          </a>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-6 sm:gap-12 mt-16 pt-16 border-t border-white/20">
-          <div>
-            <div className="text-3xl sm:text-4xl font-bold text-secondary mb-2 drop-shadow-lg">
-              50+
-            </div>
-            <p className="text-sm text-white/90">Clients Served</p>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-bold text-secondary mb-2 drop-shadow-lg">
-              200+
-            </div>
-            <p className="text-sm text-white/90">Projects Completed</p>
-          </div>
-          <div>
-            <div className="text-3xl sm:text-4xl font-bold text-secondary mb-2 drop-shadow-lg">
-              10+
-            </div>
-            <p className="text-sm text-white/90">Years Experience</p>
+            <img
+              src="/portrait.jpg"
+              alt="Portrait"
+              className="absolute inset-0 w-full h-full object-cover rounded-[32px] drop-shadow-2xl border border-white"
+            />
           </div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }
