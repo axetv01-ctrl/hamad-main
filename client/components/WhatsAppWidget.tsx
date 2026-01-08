@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 // Use the provided number: 0332 1588393 -> convert to international format (Pakistan +92)
 // Final wa.me number: 923321588393
-const WIDGET_PHONE = "923321588393";
+export const WIDGET_PHONE = "923321588393";
 
 export default function WhatsAppWidget() {
   const phone = WIDGET_PHONE;

@@ -1,4 +1,5 @@
 import { Mail, MapPin, Phone, Linkedin, Github, Twitter } from "lucide-react";
+import { WIDGET_PHONE } from "./WhatsAppWidget";
 import { useState } from "react";
 
 export default function Contact() {
@@ -23,10 +24,12 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const text = `Name: ${formData.name}\nEmail: ${formData.email}\nProject: ${formData.subject}\nMessage: ${formData.message}`;
+      const encoded = encodeURIComponent(text);
+      const url = `https://wa.me/${WIDGET_PHONE}?text=${encoded}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+
       setSubmitStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setSubmitStatus(null), 3000);
