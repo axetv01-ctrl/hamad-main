@@ -25,6 +25,8 @@ export const handleSendWhatsapp: RequestHandler = async (req, res) => {
   const phoneNumberId = process.env.WHATSAPP_PHONE_NUMBER_ID;
   const token = process.env.WHATSAPP_TOKEN;
   const recipient = process.env.WHATSAPP_RECIPIENT;
+  // Build message body
+  const bodyText = `New contact form submission:\nName: ${name || "(none)"}\nEmail: ${email || "(none)"}\nProject: ${subject || "(none)"}\nMessage: ${message || "(none)"}`;
 
   // If configuration is missing, return a fallback containing a wa.me URL so
   // the client can open the user's WhatsApp without redirecting the page.
@@ -33,9 +35,6 @@ export const handleSendWhatsapp: RequestHandler = async (req, res) => {
     const waLink = `https://wa.me/${fallbackRecipient}?text=${encodeURIComponent(bodyText)}`;
     return res.status(200).json({ ok: false, fallback: true, waLink });
   }
-
-  // Build message body
-  const bodyText = `New contact form submission:\nName: ${name || "(none)"}\nEmail: ${email || "(none)"}\nProject: ${subject || "(none)"}\nMessage: ${message || "(none)"}`;
 
   try {
     const url = `https://graph.facebook.com/v17.0/${phoneNumberId}/messages`;
