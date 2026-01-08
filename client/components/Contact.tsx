@@ -32,9 +32,17 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      if (!resp.ok) throw new Error("send failed");
+      const json = await resp.json().catch(() => null);
 
-      setSubmitStatus("success");
+      // If server returns fallback info, open wa.me link in a new tab.
+      if (resp.ok && json && json.fallback && json.waLink) {
+        window.open(json.waLink, "_blank", "noopener,noreferrer");
+        setSubmitStatus("success");
+      } else if (resp.ok) {
+        setSubmitStatus("success");
+      } else {
+        throw new Error("send failed");
+      }
       setFormData({ name: "", email: "", subject: "", message: "" });
       setTimeout(() => setSubmitStatus(null), 3000);
     } catch (error) {
